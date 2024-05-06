@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# displays numbers from 1 to 20 .
+# displays numbs from 1 to 20.
 
 COUNTER=1
 while [ $COUNTER -lt 21 ]
