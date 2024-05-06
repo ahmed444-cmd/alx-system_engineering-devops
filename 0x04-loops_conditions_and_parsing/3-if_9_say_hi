@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Echoes best school 10 times if 9 echoes Hi .
+# displays Best School 10 times.
 
 COUNTER=0
 while [ $COUNTER -lt 11 ]
