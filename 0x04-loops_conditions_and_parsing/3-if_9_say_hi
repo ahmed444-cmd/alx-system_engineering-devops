@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Echoes best school 10 times if 9 echoes Hi .
+
+COUNTER=0
+while [ $COUNTER -lt 11 ]
+do
+    if [ $COUNTER = 9 ]
+    then
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
+    ((COUNTER+=1))
+done
