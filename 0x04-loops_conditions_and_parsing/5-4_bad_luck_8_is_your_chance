@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# displays Best School 10 times.
-
+# displays Best School 10 times using if/elif.
 COUNTER=1
 while [ $COUNTER -lt 11 ]
 do
