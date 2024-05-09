@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Displays listening TCP ports
+# Displays listening UDP ports
+# Displays the PID and name of the program to which each socket belongs.
+
+netstat -l --program
