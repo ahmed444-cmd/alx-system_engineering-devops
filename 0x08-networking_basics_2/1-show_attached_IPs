@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Extract IPv4 addresses from ip command output
+ifconfig | grep -oE 'inet (addr:)?([0-9]*\.){3}[0-9]*' | awk '{print $2}' | cut -d':' -f2
