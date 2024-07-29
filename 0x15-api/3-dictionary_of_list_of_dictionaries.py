@@ -1,46 +1,29 @@
 #!/usr/bin/python3
-""" A script to retrieve the TODO lists of all employees and save them
-to a file in JSON format.
-"""
-from json import dump
-from requests import get
-from sys import argv
+"""Generates a JSON dump from mock user data using the JSON Placeholder API."""
+import json
+import requests
 
 
-def to_do_list(emp_id, user):
-""" Send a request to the API for the employee's TODO list.
-"""
-    url_todo = 'https://jsonplaceholder.typicode.com/todos/'
-    params = {'userId': emp_id}
-    tasks = get(url_todo, params=params).json()
+if __name__ == "__main__":
+    api = 'https://jsonplaceholder.typicode.com/'
 
-    #  create list of dictionaries
-    #  with info about each task
-    task_list = []
-    for task in tasks:
-        task_list.append({"username": user,
-                          "task": task.get('title'),
-                          "completed": task.get('completed')})
-    return {emp_id: task_list}
+    users = requests.get(api + 'users').json()
 
-
-def get_employees_to_do_lists():
-""" Send a request to the API for all employees and their TODO
-lists, then save the data in JSON format.
-"""
-    url = 'https://jsonplaceholder.typicode.com/users/'
-    file_name = 'todo_all_employees.json'
-    to_do_lists = {}
-    users = get(url).json()
+    data = dict()
 
     for user in users:
-        to_do_lists.update(to_do_list(user.get('id'),
-                           user.get('username')))
+        user_id = user.get("id")
+        tasks = requests.get(api + 'todos?userId={}'.format(user_id))\
+                        .json()
 
-    # open file in write mode and jsonify
-    with open(file_name, 'w', encoding='utf8') as f:
-        dump(to_do_lists, f)
+        task_list = [{
+                        "username": user.get("username"),
+                        "completed": task.get("completed"),
+                        "task": task.get("title")
+                    } for task in tasks]
 
+        data[user_id] = task_list
 
-if __name__ == '__main__':
-    get_employees_to_do_lists()
+    filename = "todo_all_employees.json"
+    with open(filename, "w") as file:
+            json.dump(data, file)
