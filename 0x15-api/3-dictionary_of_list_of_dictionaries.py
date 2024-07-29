@@ -1,29 +1,18 @@
 #!/usr/bin/python3
-"""Generates a JSON from fake user data using the JSON Placeholder API."""
+"""Exports the TODO list information of all employees to JSON format."""
 import json
 import requests
 
-
 if __name__ == "__main__":
-    api = 'https://jsonplaceholder.typicode.com/'
+    url = "https://jsonplaceholder.typicode.com/"
+    users = requests.get(url + "users").json()
 
-    users = requests.get(api + 'users').json()
-
-    data = dict()
-
-    for user in users:
-        user_id = user.get("id")
-        tasks = requests.get(api + 'todos?userId={}'.format(user_id))\
-                        .json()
-
-        task_list = [{
-                        "username": user.get("username"),
-                        "completed": task.get("completed"),
-                        "task": task.get("title")
-                    } for task in tasks]
-
-        data[user_id] = task_list
-
-    filename = "todo_all_employees.json"
-    with open(filename, "w") as file:
-            json.dump(data, file)
+    with open("todo_all_employees.json", "w") as jsonfile:
+        json.dump({
+            u.get("id"): [{
+                "task": t.get("title"),
+                "completed": t.get("completed"),
+                "username": u.get("username")
+            } for t in requests.get(url + "todos",
+                                    params={"userId": u.get("id")}).json()]
+            for u in users}, jsonfile)
