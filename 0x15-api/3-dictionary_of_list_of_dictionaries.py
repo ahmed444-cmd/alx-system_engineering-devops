@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Generates a JSON dump from mock user data using the JSON Placeholder API."""
+"""Generates a JSON dump from mock user data 
+using the JSON Placeholder API."""
 import json
 import requests
 
