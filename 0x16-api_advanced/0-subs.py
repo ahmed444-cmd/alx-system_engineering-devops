@@ -8,17 +8,21 @@ import requests
 
 def number_of_subscribers(subreddit):
     """Returns the count of subscribers for the specified subreddit"""
-        url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+ if subreddit is None or not isinstance(subreddit, str):
+        return 0
 
-    headers = {'User-Agent': 'RedditDataAnalyzer/1.0 (ALX Africa)'}
+    headers = {'User-Agent': 'selBot/1.0'}
+    URL = f'https://www.reddit.com/r/{subreddit}/about.json'
 
-    response = requests.get(url, headers=headers, allow_redirects=False)
-
-    if response.status_code == 200:
+    try:
+        response = requests.get(URL, headers=headers, allow_redirects=False)
+        response.raise_for_status()
         data = response.json()
-
-        subscribers = data.get('data', {}).get('subscribers', 0)
-
+        subscribers = data['data']['subscribers']
         return subscribers
-    else:
+
+    except requests.exceptions.RequestException:
+        return 0
+
+    except (KeyError, ValueError):
         return 0
