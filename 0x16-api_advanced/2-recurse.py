@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" recursive function that queries the Reddit API """
+""" Function Performing Recursive API Requests """
 import requests
 import sys
 after = None
@@ -7,11 +7,11 @@ after = None
 
 def recurse(subreddit, hot_list=[]):
     """     Args:
-        subreddit: subreddit name
-        hot_list: list of hot titles in subreddit
-        after: last hot_item appended to hot_list
+        subreddit: name of subreddit
+        hot_list: A list to accumulate titles of hot posts
+        after: last hot_item added to hot_list
     Returns:
-        a list containing the titles of all hot articles for the subreddit
+        a list of the titles of all hot articles for the subreddit
         or None if queried subreddit is invalid """
     global after
     headers = {'User-Agent': 'xica369'}
