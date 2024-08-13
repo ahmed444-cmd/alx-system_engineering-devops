@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-"""Function to query subscribers on a given Reddit subreddit."""
+#!/usr/bin/pyhton3
+"""This python script query subs on a given Reddit subreddit api url."""
 import requests
 
 
@@ -9,7 +9,7 @@ def number_of_subscribers(subreddit):
     headers = {
         "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
     }
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    response = requests.get(url,headers=headers, allow_redirects=False)
     if response.status_code == 404:
         return 0
     results = response.json().get("data")
