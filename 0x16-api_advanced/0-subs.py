@@ -1,16 +1,18 @@
 #!/usr/bin/python3
-"""Implements the number_of_subscribers function"""
+"""
+Implements the number_of_subscribers function
+"""
+import requests
 
 
 def number_of_subscribers(subreddit):
-    """Returns the count of subscribers for the specified subreddit"""
-    import requests
-
-    sub_info = requests.get("https://www.reddit.com/r/{}/about.json"
-                            .format(subreddit),
-                            headers={"User-Agent": "My-User-Agent"},
-                            allow_redirects=False)
-    if sub_info.status_code >= 300:
+    """
+    Returns the count of subscribers for the specified subreddit
+    """
+    url = 'http://www.reddit.com/r/{}/about.json'.format(subreddit)
+    headers = {'User-Agent': 'Python/1.0(Holberton School 0x16 task 0)'}
+    response = requests.get(url, headers=headers)
+    if (not response.ok):
         return 0
-
-    return sub_info.json().get("data").get("subscribers")
+    subscriber_count = response.json().get('data').get('subscribers')
+    return subscriber_count
