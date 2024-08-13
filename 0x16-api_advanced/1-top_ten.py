@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Function that queries the Reddit API """
+""" Function  queries the Reddit API """
 import requests
 import sys
 
@@ -7,7 +7,7 @@ import sys
 def top_ten(subreddit):
     """ Returns: top ten post titles
         or None if queried subreddit is invalid """
-    headers = {'User-Agent': 'xica369'}
+    headers = {'User-Agent': 'custom'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     parameters = {'limit': 10}
     response = requests.get(url, headers=headers, allow_redirects=False,
