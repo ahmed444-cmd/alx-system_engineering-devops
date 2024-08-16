@@ -60,7 +60,7 @@ In the blog titled "The One Where the Load Balancer Went Rogue," the outage is h
 
 ## Contact
 
-For questions or further information, please reach out to Joseph Mahiuha at [ahmedelabide@gmail.com](mailto:ahmedelabide@gmail.com).
+For questions or further information, please reach out to Ahmed El Abid at [ahmedelabide@gmail.com](mailto:ahmedelabide@gmail.com).
 
 ---
 
